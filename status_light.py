@@ -46,9 +46,9 @@ class Config:
 
 class Color:
     """ANSI 颜色代码"""
-    RED = '\033[1;31m'
-    YELLOW = '\033[1;33m'
-    GREEN = '\033[1;32m'
+    RED = '\033[1;91m'      # 亮红色（更显眼）
+    YELLOW = '\033[0;33m'   # 暗黄色（降低亮度）
+    GREEN = '\033[0;32m'    # 暗绿色（降低亮度）
     GRAY = '\033[0;90m'
     CYAN = '\033[1;36m'
     RESET = '\033[0m'
