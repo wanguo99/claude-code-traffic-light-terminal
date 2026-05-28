@@ -262,11 +262,12 @@ class TrafficLight:
 
     LIGHT_HEIGHT = 8  # 每个灯的高度（行数）
 
-    def __init__(self, project_name: Optional[str] = None):
+    def __init__(self, project_name: Optional[str] = None, enable_beep: bool = False):
         self.project_name = project_name or ProjectManager.get_selected_project()
         self.state = State.YELLOW
         self.blink_on = True
         self.running = True
+        self.enable_beep = enable_beep
         self.last_beep_state = None  # 记录上次蜂鸣的状态
 
     def _draw_light_block(self, is_on: bool, color: str) -> None:
@@ -323,17 +324,18 @@ class TrafficLight:
                 if self.state != new_state:
                     self.state = new_state
                     self.blink_on = True
-                    # 根据状态触发不同次数的蜂鸣
-                    if new_state == State.RED and self.last_beep_state != State.RED:
-                        print('\a', end='', flush=True)
-                        time.sleep(0.2)
-                        print('\a', end='', flush=True)
-                        self.last_beep_state = State.RED
-                    elif new_state == State.YELLOW and self.last_beep_state != State.YELLOW:
-                        print('\a', end='', flush=True)
-                        self.last_beep_state = State.YELLOW
-                    elif new_state == State.GREEN:
-                        self.last_beep_state = None
+                    # 根据状态触发不同次数的蜂鸣（仅在启用时）
+                    if self.enable_beep:
+                        if new_state == State.RED and self.last_beep_state != State.RED:
+                            print('\a', end='', flush=True)
+                            time.sleep(0.2)
+                            print('\a', end='', flush=True)
+                            self.last_beep_state = State.RED
+                        elif new_state == State.YELLOW and self.last_beep_state != State.YELLOW:
+                            print('\a', end='', flush=True)
+                            self.last_beep_state = State.YELLOW
+                        elif new_state == State.GREEN:
+                            self.last_beep_state = None
 
     def run(self) -> None:
         """运行主循环"""
@@ -368,6 +370,12 @@ def setup_signal_handlers() -> None:
 
 def main() -> None:
     """主函数"""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Claude Code 终端红绿灯监控")
+    parser.add_argument("--beep", action="store_true", help="启用状态切换蜂鸣提示")
+    args = parser.parse_args()
+
     print("=" * 50)
     print("Claude Code 终端红绿灯监控")
     print("=" * 50)
@@ -380,11 +388,12 @@ def main() -> None:
     atexit.register(ConfigManager.restore)
     setup_signal_handlers()
 
-    print("启动红绿灯监视器...")
+    beep_status = "已启用" if args.beep else "已禁用"
+    print(f"启动红绿灯监视器（蜂鸣提示: {beep_status}）...")
     print()
     time.sleep(1)
 
-    TrafficLight().run()
+    TrafficLight(enable_beep=args.beep).run()
 
 
 if __name__ == "__main__":
