@@ -263,10 +263,10 @@ class TrafficLight:
         """绘制一个灯块"""
         if is_on:
             for _ in range(self.LIGHT_HEIGHT):
-                print(f"║     {color}████████████████{Color.RESET}     ║")
+                print(f"     {color}████████████████{Color.RESET}     ")
         else:
             for _ in range(self.LIGHT_HEIGHT):
-                print(f"║     {Color.GRAY}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓{Color.RESET}     ║")
+                print(f"     {Color.GRAY}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓{Color.RESET}     ")
 
     def draw(self) -> None:
         """绘制红绿灯"""
@@ -281,16 +281,14 @@ class TrafficLight:
 
         # 红灯
         self._draw_light_block(self.state == State.RED, Color.RED)
-        print("║                              ║")
 
         # 黄灯
         self._draw_light_block(self.state == State.YELLOW, Color.YELLOW)
-        print("║                              ║")
 
         # 绿灯
         self._draw_light_block(self.state == State.GREEN, Color.GREEN)
-        print("║                              ║")
 
+        print("║                              ║")
         print("╚══════════════════════════════╝")
 
         # 状态信息
