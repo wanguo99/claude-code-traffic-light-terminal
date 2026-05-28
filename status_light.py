@@ -279,16 +279,16 @@ class TrafficLight:
         print("╠══════════════════════════════╣")
         print("║                              ║")
 
-        # 红灯
-        self._draw_light_block(self.state == State.RED, Color.RED)
+        # 绿灯
+        self._draw_light_block(self.state == State.GREEN, Color.GREEN)
         print()  # 空行分隔
 
         # 黄灯
         self._draw_light_block(self.state == State.YELLOW, Color.YELLOW)
         print()  # 空行分隔
 
-        # 绿灯
-        self._draw_light_block(self.state == State.GREEN, Color.GREEN)
+        # 红灯
+        self._draw_light_block(self.state == State.RED, Color.RED)
 
         print("║                              ║")
         print("╚══════════════════════════════╝")
