@@ -267,6 +267,7 @@ class TrafficLight:
         self.state = State.YELLOW
         self.blink_on = True
         self.running = True
+        self.last_beep_state = None  # 记录上次蜂鸣的状态
 
     def _draw_light_block(self, is_on: bool, color: str) -> None:
         """绘制一个灯块"""
@@ -322,6 +323,17 @@ class TrafficLight:
                 if self.state != new_state:
                     self.state = new_state
                     self.blink_on = True
+                    # 根据状态触发不同次数的蜂鸣
+                    if new_state == State.RED and self.last_beep_state != State.RED:
+                        print('\a', end='', flush=True)
+                        time.sleep(0.2)
+                        print('\a', end='', flush=True)
+                        self.last_beep_state = State.RED
+                    elif new_state == State.YELLOW and self.last_beep_state != State.YELLOW:
+                        print('\a', end='', flush=True)
+                        self.last_beep_state = State.YELLOW
+                    elif new_state == State.GREEN:
+                        self.last_beep_state = None
 
     def run(self) -> None:
         """运行主循环"""
