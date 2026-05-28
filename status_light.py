@@ -293,16 +293,16 @@ class TrafficLight:
         print("║                              ║")
         print("╚══════════════════════════════╝")
 
-        # 状态信息框
-        print("╔══════════════════════════════╗")
+        # 状态信息
+        print("════════════════════════════════")
         color = self.state.color
-        print(f"║ {color}█ {self.state.value.upper()}{Color.RESET} - {self.state.description:<18} ║")
-        print(f"║                              ║")
-        print(f"║ {Color.CYAN}项目:{Color.RESET} {self.project_name:<22} ║")
-        print(f"║ {Color.CYAN}时间:{Color.RESET} {time.strftime('%H:%M:%S'):<22} ║")
-        print(f"║                              ║")
-        print(f"║ Press Ctrl+C to exit         ║")
-        print("╚══════════════════════════════╝", end='', flush=True)
+        print(f" {color}█ {self.state.value.upper()}{Color.RESET} - {self.state.description}")
+        print()
+        print(f" {Color.CYAN}项目:{Color.RESET} {self.project_name}")
+        print(f" {Color.CYAN}时间:{Color.RESET} {time.strftime('%H:%M:%S')}")
+        print()
+        print(f" Press Ctrl+C to exit")
+        print("════════════════════════════════", end='', flush=True)
 
     def update_state(self) -> None:
         """从状态文件更新状态"""
