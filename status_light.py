@@ -270,8 +270,8 @@ class TrafficLight:
 
     def draw(self) -> None:
         """绘制红绿灯"""
-        # 清屏并移动光标到顶部
-        print('\033[2J\033[H', end='')
+        # 清除屏幕和缓冲区
+        os.system('clear' if os.name != 'nt' else 'cls')
 
         # 绘制边框和标题
         print("╔══════════════════════════════╗")
