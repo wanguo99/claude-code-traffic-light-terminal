@@ -328,10 +328,10 @@ class TrafficLight:
                     if self.enable_beep:
                         if new_state == State.RED and self.last_beep_state != State.RED:
                             print('\a', end='', flush=True)
-                            time.sleep(0.2)
-                            print('\a', end='', flush=True)
                             self.last_beep_state = State.RED
                         elif new_state == State.YELLOW and self.last_beep_state != State.YELLOW:
+                            print('\a', end='', flush=True)
+                            time.sleep(0.5)
                             print('\a', end='', flush=True)
                             self.last_beep_state = State.YELLOW
                         elif new_state == State.GREEN:
