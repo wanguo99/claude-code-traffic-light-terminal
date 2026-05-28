@@ -294,7 +294,6 @@ class TrafficLight:
         print("╚══════════════════════════════╝")
 
         # 状态信息
-        print("════════════════════════════════")
         color = self.state.color
         print(f" {color}█ {self.state.value.upper()}{Color.RESET} - {self.state.description}")
         print()
