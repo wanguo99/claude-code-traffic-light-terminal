@@ -216,7 +216,6 @@ class ConfigManager:
             HookConfig("PermissionRequest", State.RED),
             HookConfig("PreToolUse", State.RED, Config.PERMISSION_TOOLS),
             HookConfig("PostToolUse", State.GREEN, Config.PERMISSION_TOOLS),
-            HookConfig("AssistantMessage", State.YELLOW),
             HookConfig("Stop", State.YELLOW),
             HookConfig("SessionEnd", State.YELLOW),
         ]
